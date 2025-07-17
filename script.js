@@ -1,111 +1,124 @@
 // Testimonials Carousel Functionality
 document.addEventListener("DOMContentLoaded", function () {
   const testimonialsTrack = document.getElementById("testimonialsTrack");
-  const carouselDots = document.getElementById("carouselDots");
-  const testimonialSlides = document.querySelectorAll(".testimonial-slide");
+  const prevButton = document.getElementById("carouselPrev");
+  const nextButton = document.getElementById("carouselNext");
 
-  // Check if carousel elements exist on the page before running the code
-  if (!testimonialsTrack || !carouselDots || testimonialSlides.length === 0) {
+  // Check if carousel elements exist
+  if (!testimonialsTrack || !prevButton || !nextButton) {
     return;
   }
 
-  let currentSlide = 0; // Index of the first visible slide
-  let slidesToShow = 3;
+  const testimonialSlides =
+    testimonialsTrack.querySelectorAll(".testimonial-slide");
   const totalSlides = testimonialSlides.length;
-  let numPages = 0;
+  let currentSlide = 0;
+  let slidesToShow = 3;
+  let autoScrollInterval;
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-  // Determine slides to show and number of pages based on screen size
   function setupCarousel() {
-    if (window.innerWidth <= 768) {
+    // Determine slides to show based on screen size
+    if (window.innerWidth <= 767.98) {
       slidesToShow = 1;
-    } else if (window.innerWidth <= 992) {
+    } else if (window.innerWidth <= 991.98) {
       slidesToShow = 2;
     } else {
       slidesToShow = 3;
     }
-    // Ensure we don't try to show more slides than available
     slidesToShow = Math.min(slidesToShow, totalSlides);
-
-    // Calculate the number of pages (or dots) needed
-    if (totalSlides > slidesToShow) {
-      numPages = totalSlides - slidesToShow + 1;
-    } else {
-      numPages = 1;
-    }
   }
 
-  // Create dots for carousel navigation
-  function createDots() {
-    carouselDots.innerHTML = "";
-    // Only show dots if there is more than one page
-    if (numPages <= 1) return;
-
-    for (let i = 0; i < numPages; i++) {
-      const dot = document.createElement("span");
-      dot.classList.add("carousel-dot");
-      if (i === 0) dot.classList.add("active");
-      dot.addEventListener("click", () => goToSlide(i));
-      carouselDots.appendChild(dot);
-    }
-  }
-
-  // Go to a specific slide index when a dot is clicked
-  function goToSlide(slideIndex) {
-    currentSlide = slideIndex;
-    updateCarousel();
-  }
-
-  // Update carousel position and active dot
   function updateCarousel() {
-    // Check if the document direction is RTL
     const isRTL = document.documentElement.dir === "rtl";
+    const singleSlideWidth = 100 / slidesToShow;
+    const translationValue = currentSlide * singleSlideWidth;
 
-    // Calculate the percentage to move the track
-    const singleSlideWidthPercentage = 100 / slidesToShow;
-    const translationValue = currentSlide * singleSlideWidthPercentage;
-
-    // Apply the correct transform based on the direction
     if (isRTL) {
       testimonialsTrack.style.transform = `translateX(${translationValue}%)`;
     } else {
       testimonialsTrack.style.transform = `translateX(-${translationValue}%)`;
     }
-
-    // Update active dot
-    const dots = document.querySelectorAll(".carousel-dot");
-    dots.forEach((dot, index) => {
-      dot.classList.remove("active");
-      if (index === currentSlide) {
-        dot.classList.add("active");
-      }
-    });
   }
 
-  // Auto-advance carousel one slide at a time
-  function autoAdvance() {
-    const maxSlideIndex = totalSlides - slidesToShow;
-    if (totalSlides > slidesToShow) {
-      currentSlide = currentSlide >= maxSlideIndex ? 0 : currentSlide + 1;
-      updateCarousel();
-    }
-  }
-
-  // Initialize carousel
-  function initialize() {
-    setupCarousel();
-    createDots();
-    // Ensure currentSlide is valid after resize
-    currentSlide = Math.min(currentSlide, totalSlides - slidesToShow);
+  function moveToNextSlide() {
+    const maxSlideIndex =
+      totalSlides > slidesToShow ? totalSlides - slidesToShow : 0;
+    currentSlide = currentSlide >= maxSlideIndex ? 0 : currentSlide + 1;
     updateCarousel();
   }
 
-  initialize();
+  function moveToPrevSlide() {
+    const maxSlideIndex =
+      totalSlides > slidesToShow ? totalSlides - slidesToShow : 0;
+    currentSlide = currentSlide <= 0 ? maxSlideIndex : currentSlide - 1;
+    updateCarousel();
+  }
 
-  // Auto-advance every 10 seconds
-  setInterval(autoAdvance, 10000);
+  function startAutoScroll() {
+    stopAutoScroll(); // Clear any existing interval
+    autoScrollInterval = setInterval(moveToNextSlide, 15000); // Set to 15 seconds
+  }
 
-  // Handle window resize
+  function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
+  }
+
+  // Touch event handlers for mobile swipe
+  function handleTouchStart(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAutoScroll();
+  }
+
+  function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+    startAutoScroll();
+  }
+
+  function handleSwipeGesture() {
+    const swipeThreshold = 50; // Minimum distance for a swipe
+    const isRTL = document.documentElement.dir === "rtl";
+
+    if (isRTL) {
+      if (touchEndX - touchStartX > swipeThreshold) moveToNextSlide();
+      if (touchStartX - touchEndX > swipeThreshold) moveToPrevSlide();
+    } else {
+      if (touchStartX - touchEndX > swipeThreshold) moveToNextSlide();
+      if (touchEndX - touchStartX > swipeThreshold) moveToPrevSlide();
+    }
+  }
+
+  function initialize() {
+    setupCarousel();
+    const maxSlideIndex =
+      totalSlides > slidesToShow ? totalSlides - slidesToShow : 0;
+    currentSlide = Math.min(currentSlide, maxSlideIndex);
+    updateCarousel();
+    startAutoScroll();
+  }
+
+  // Event Listeners
+  nextButton.addEventListener("click", () => {
+    moveToNextSlide();
+    startAutoScroll(); // Reset interval on manual navigation
+  });
+
+  prevButton.addEventListener("click", () => {
+    moveToPrevSlide();
+    startAutoScroll(); // Reset interval on manual navigation
+  });
+
+  // Add touch listeners
+  testimonialsTrack.addEventListener("touchstart", handleTouchStart, false);
+  testimonialsTrack.addEventListener("touchend", handleTouchEnd, false);
+
+  // Re-initialize on window resize
   window.addEventListener("resize", initialize);
+
+  // Initial setup
+  initialize();
 });
 
 // Smooth scrolling for navigation links
@@ -190,53 +203,22 @@ document.addEventListener("DOMContentLoaded", function () {
   animateOnScroll();
 });
 
-// Mobile menu toggle functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const navbarCollapse = document.getElementById("navbarNav");
-  if (navbarCollapse) {
-    const navLinks = navbarCollapse.querySelectorAll(".nav-link");
-    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-      toggle: false,
-    });
-
-    // Close mobile menu when a navigation link is clicked
-    navLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        if (navbarCollapse.classList.contains("show")) {
-          bsCollapse.hide();
-        }
-      });
-    });
-    // Add this to the existing mobile menu code
-    navLinks.forEach((link) => {
-      link.style.padding = "12px 15px"; // Larger touch targets
-    });
-  }
-});
-
-// --- START: Auto-close off-canvas menu on link click ---
+// Auto-close off-canvas menu on link click
 document.addEventListener("DOMContentLoaded", function () {
   const offcanvasNavbar = document.getElementById("offcanvasNavbar");
 
-  // If the offcanvas menu element doesn't exist, do nothing.
   if (!offcanvasNavbar) {
     return;
   }
 
-  // Select all navigation links within the off-canvas menu.
   const navLinks = offcanvasNavbar.querySelectorAll(".nav-link");
+  const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasNavbar);
 
-  // Add a click event listener to each navigation link.
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      // Get the Bootstrap off-canvas instance for our menu.
-      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasNavbar);
-
-      // Hide the off-canvas menu.
       if (bsOffcanvas) {
         bsOffcanvas.hide();
       }
     });
   });
 });
-// --- END: Auto-close off-canvas menu on link click ---
