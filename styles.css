@@ -840,7 +840,9 @@ body {
   .section-title {
     margin-bottom: 30px;
   }
-
+  .navbar-brand {
+    font-size: 1.2rem; /* Smaller font size for very small screens */
+  }
   /* 2. General Typography */
   h1,
   .h1 {
