@@ -213,3 +213,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// --- START: Auto-close off-canvas menu on link click ---
+document.addEventListener("DOMContentLoaded", function () {
+  const offcanvasNavbar = document.getElementById("offcanvasNavbar");
+
+  // If the offcanvas menu element doesn't exist, do nothing.
+  if (!offcanvasNavbar) {
+    return;
+  }
+
+  // Select all navigation links within the off-canvas menu.
+  const navLinks = offcanvasNavbar.querySelectorAll(".nav-link");
+
+  // Add a click event listener to each navigation link.
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      // Get the Bootstrap off-canvas instance for our menu.
+      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasNavbar);
+
+      // Hide the off-canvas menu.
+      if (bsOffcanvas) {
+        bsOffcanvas.hide();
+      }
+    });
+  });
+});
+// --- END: Auto-close off-canvas menu on link click ---

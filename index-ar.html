@@ -68,57 +68,76 @@
     </script>
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <img
-            src="./file.svg"
-            alt="External Education Logo"
-            class="navbar-logo-svg mx-2"
-          />
-          <span>اكسترنال</span> اديوكيشن
-        </a>
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+  <div class="container flex-row" >
+    <a class="navbar-brand d-flex align-items-center ms-5" href="#">
+      <img
+        src="./file.svg"
+        alt="External Education Logo"
+        class="navbar-logo-svg mx-2"
+      />
+      <span>اكسترنال</span> اديوكيشن
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="offcanvas offcanvas-start"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">القائمة</h5>
         <button
-          class="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="#home">الرئيسية</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">من نحن</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#services">خدماتنا</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#steps">كيف نعمل</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#testimonials">آراء الطلاب</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">اتصل بنا</a>
-            </li>
-          </ul>
-          <!-- Language Switcher -->
-          <a href="index.html" class="btn btn-outline-secondary lang-switcher-btn mx-2">English</a>
-          <a
-            href="https://wa.me/201020255497"
-            class="btn btn-primary me-lg-3"
-            target="_blank"
-            >قدم الآن</a
-          >
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">الرئيسية</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">من نحن</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">خدماتنا</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#steps">كيف نعمل</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#testimonials">آراء الطلاب</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">اتصل بنا</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row align-items-center">
+            <a href="index.html" class="btn btn-outline-secondary lang-switcher-btn">English</a>
+            <a
+              href="https://wa.me/201020255497"
+              class="btn btn-primary ms-lg-3 mt-2 mt-lg-0"
+              target="_blank"
+              >قدم الآن</a
+            >
         </div>
       </div>
-    </nav>
-
+    </div>
+  </div>
+</nav>
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="container">

@@ -19,6 +19,10 @@ body {
   line-height: 1.6;
 }
 
+.container {
+  flex-wrap: nowrap;
+}
+
 /* Header Styles */
 .navbar {
   background: linear-gradient(
@@ -799,3 +803,114 @@ body {
     transform: translateX(50%);
   }
 }
+/* --- START: DESKTOP VIEW FOR OFF-CANVAS NAVBAR --- */
+@media (min-width: 992px) {
+  /* Restore navbar-collapse behavior on desktop */
+  .navbar-expand-lg .offcanvas {
+    visibility: visible !important;
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    border: 0;
+    transform: none;
+    flex-grow: 1;
+  }
+
+  /* Hide the off-canvas header on desktop */
+  .navbar-expand-lg .offcanvas-header {
+    display: none;
+  }
+
+  /* Adjust the body for horizontal layout */
+  .navbar-expand-lg .offcanvas-body {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+}
+/* --- END: DESKTOP VIEW FOR OFF-CANVAS NAVBAR --- */
+/* --- START: COMPREHENSIVE STYLES FOR VERY SMALL SCREENS (< 366px) --- */
+@media (max-width: 365.98px) {
+  /* 1. General Spacing & Padding */
+  section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .section-title {
+    margin-bottom: 30px;
+  }
+
+  /* 2. General Typography */
+  h1,
+  .h1 {
+    font-size: 2rem;
+  }
+  h2,
+  .h2 {
+    font-size: 1.6rem;
+  }
+  h3,
+  .h3 {
+    font-size: 1.4rem;
+  }
+
+  /* 3. Navbar Adjustments */
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  .navbar-logo-svg {
+    height: 35px;
+  }
+
+  /* 4. Hero Section */
+  .hero-content h1 {
+    font-size: 1.9rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  /* 5. Button Adjustments */
+  .btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+  }
+  .btn-lg {
+    padding: 0.6rem 1.1rem;
+    font-size: 1rem;
+  }
+
+  /* 6. Services, Steps, and Testimonials Spacing */
+  .service-card {
+    padding: 20px;
+    margin-bottom: 20px; /* Reduced vertical space */
+  }
+  .step-card {
+    margin-bottom: 20px; /* Reduced vertical space */
+  }
+  .testimonial-card {
+    padding: 20px;
+  }
+
+  /* 7. Contact Form & Info Spacing */
+  .contact-form {
+    padding: 20px;
+  }
+  .form-control {
+    margin-bottom: 15px; /* Reduced space between inputs */
+  }
+  .contact-item {
+    margin-bottom: 20px; /* Reduced space between contact items */
+  }
+
+  /* 8. Footer Spacing */
+  .footer {
+    padding-top: 40px;
+    padding-bottom: 15px;
+  }
+  .footer [class*="col-"] {
+    margin-bottom: 30px; /* Reduced space between footer columns */
+  }
+}
+/* --- END: COMPREHENSIVE STYLES FOR VERY SMALL SCREENS (< 366px) --- */
