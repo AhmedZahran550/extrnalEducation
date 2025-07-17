@@ -840,9 +840,7 @@ body {
   .section-title {
     margin-bottom: 30px;
   }
-  .navbar-brand {
-    font-size: 1.2rem; /* Smaller font size for very small screens */
-  }
+
   /* 2. General Typography */
   h1,
   .h1 {
@@ -863,6 +861,12 @@ body {
   }
   .navbar-logo-svg {
     height: 35px;
+  }
+
+  /* Adjusts the hamburger menu icon button */
+  .navbar-toggler {
+    font-size: 0.9rem; /* Scales the icon size down */
+    padding: 0.2rem 0.5rem; /* Reduces padding to make the button smaller */
   }
 
   /* 4. Hero Section */
