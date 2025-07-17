@@ -920,3 +920,15 @@ body {
   }
 }
 /* --- END: COMPREHENSIVE STYLES FOR VERY SMALL SCREENS (< 366px) --- */
+/* --- START: FIX FOR NAVBAR ON SMALL MOBILE (e.g., iPhone X) --- */
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    white-space: nowrap; /* Prevents the brand text from wrapping */
+    font-size: 1.2rem; /* Adjusts font size for small screens */
+  }
+
+  .navbar-logo-svg {
+    height: 38px; /* Adjusts logo size for small screens */
+  }
+}
+/* --- END: FIX FOR NAVBAR ON SMALL MOBILE --- */
