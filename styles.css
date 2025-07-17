@@ -18,6 +18,7 @@ body {
   background-color: var(--white);
   color: var(--dark-gray);
   line-height: 1.6;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
 /* --- Base Component Styles --- */
@@ -184,6 +185,13 @@ section {
 .testimonials {
   background: linear-gradient(to right, var(--primary-orange), #ff8c5f);
   color: var(--white);
+}
+
+.testimonials-carousel {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .testimonials-track {
@@ -418,9 +426,6 @@ section {
     align-items: center;
     padding: 0;
   }
-  .testimonial-slide {
-    min-width: 33.333%;
-  }
 }
 
 /* Tablet view */
@@ -596,11 +601,6 @@ section {
 /* --- RTL STYLES --- */
 [dir="rtl"] {
   text-align: right;
-}
-[dir="rtl"] .navbar-brand,
-[dir="rtl"] .navbar-toggler {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }
 [dir="rtl"] .author-img,
 [dir="rtl"] .step-number,
