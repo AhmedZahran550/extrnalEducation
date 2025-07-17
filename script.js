@@ -207,5 +207,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+    // Add this to the existing mobile menu code
+    navLinks.forEach((link) => {
+      link.style.padding = "12px 15px"; // Larger touch targets
+    });
   }
 });
