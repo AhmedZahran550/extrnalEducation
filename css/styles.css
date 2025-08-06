@@ -95,11 +95,15 @@ body {
 }
 
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80");
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 1)
+    ),
+    url("../assets/6039767437987137249.jpg");
   background-size: cover;
   background-position: center;
-  height: 80vh;
+  height: 91.75vh;
   display: flex;
   align-items: center;
   color: var(--white);
@@ -655,3 +659,105 @@ section {
     transform: translateX(50%);
   }
 }
+
+/* Global Study Destinations Section Styles */
+.global-destinations {
+  padding: 80px 0;
+  background-color: var(--white);
+  text-align: center;
+}
+
+.global-destinations .section-title {
+  margin-bottom: 60px;
+}
+
+.global-destinations .section-title h2 {
+  color: var(--secondary-gray);
+}
+
+.global-destinations .section-title p {
+  color: var(--dark-gray);
+  font-size: 1.1rem;
+  margin-top: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.country-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 25px;
+  height: 100%; /* Ensure all cards have the same height */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden; /* Important: Hides the zoomed out parts of the image */
+}
+
+.country-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.country-card h3 {
+  color: var(--primary-orange);
+  margin-top: 0; /* Adjust margin as it's now at the very top */
+  margin-bottom: 20px; /* Space between title and image */
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.country-img-wrapper {
+  width: 100%; /* Take full width of the card */
+  height: 200px; /* Fixed height for the image area */
+  overflow: hidden; /* Crucial: Hides the zoomed out parts of the image */
+  border-radius: 8px; /* Apply border-radius to the wrapper */
+}
+
+.country-card img {
+  width: 100%;
+  height: 100%; /* Make image fill its wrapper */
+  object-fit: cover; /* Crop image to cover the area, maintaining aspect ratio */
+  object-position: center;
+  transition: transform 0.5s ease; /* Smooth transition for zoom effect */
+  border-radius: 0; /* Remove border-radius here as it's on the wrapper */
+  margin-bottom: 0; /* Remove existing margin-bottom */
+}
+
+.country-card:hover .country-img-wrapper img {
+  transform: scale(1.1); /* Zooms the image by 10% on hover */
+}
+
+/* Remove or comment out any previous .country-card p styles as the paragraph is now removed */
+/*
+.country-card p {
+  // ... (previous styles for paragraph) ...
+}
+.country-card p strong {
+  // ... (previous styles for strong tag) ...
+}
+*/
+
+/* Responsive adjustments for Global Study Destinations */
+@media (max-width: 767.98px) {
+  .global-destinations .section-title {
+    margin-bottom: 40px;
+  }
+  .country-card {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .country-img-wrapper {
+    height: 180px; /* Slightly smaller image height for very small screens */
+  }
+  .country-card h3 {
+    font-size: 1.6rem;
+  }
+}
+/* styles.css */
