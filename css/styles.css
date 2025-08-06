@@ -729,7 +729,7 @@ section {
 
 .country-card img {
   width: 100%;
-  height: auto; /* Make image fill its wrapper */
+  height: 100%; /* Make image fill its wrapper */
   object-fit: cover; /*Crop image to cover the area, maintaining aspect ratio*/
   object-position: center;
   transition: transform 0.5s ease; /* Smooth transition for zoom effect */
