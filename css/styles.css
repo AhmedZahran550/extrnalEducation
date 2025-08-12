@@ -942,7 +942,7 @@ section {
   }
 
   [dir="rtl"] .branches-list h4:after {
-    right: calc(50% - 25px);
+    right: 50%;
     transform: translateX(50%);
   }
 }
