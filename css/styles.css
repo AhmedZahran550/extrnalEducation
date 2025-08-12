@@ -770,3 +770,180 @@ section {
   }
 }
 /* styles.css */
+/* Branches Map Section Styles */
+.branches-map {
+  padding: 80px 0;
+  background-color: var(--light-gray);
+}
+
+.map-container {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.branches-list {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.branches-list h4 {
+  color: var(--secondary-gray);
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.branches-list h4:after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-orange);
+  bottom: 0;
+  left: 0;
+}
+
+.branch-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.branch-item:hover,
+.branch-item.active {
+  background-color: rgba(255, 107, 53, 0.05);
+  border-color: var(--primary-orange);
+  transform: translateX(5px);
+}
+
+.branch-icon {
+  width: 45px;
+  height: 45px;
+  background-color: var(--primary-orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.2rem;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.branch-info h5 {
+  color: var(--secondary-gray);
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.branch-info p {
+  color: #666;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.branch-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.branch-contact small {
+  color: var(--primary-orange);
+  font-weight: 500;
+}
+
+.branch-contact i {
+  font-size: 0.8rem;
+}
+
+/* Custom marker styles for the map */
+.custom-marker {
+  background-color: var(--primary-orange);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* RTL adjustments */
+[dir="rtl"] .branch-icon {
+  margin-left: 15px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .branches-list h4:after {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .branch-item:hover,
+[dir="rtl"] .branch-item.active {
+  transform: translateX(-5px);
+}
+
+/* Responsive styles */
+@media (max-width: 991.98px) {
+  .branches-list {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .branches-map {
+    padding: 60px 0;
+  }
+
+  #map {
+    height: 350px !important;
+  }
+
+  .branches-list {
+    padding: 20px;
+  }
+
+  .branch-item {
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+
+  .branch-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    font-size: 1rem;
+  }
+
+  [dir="rtl"] .branch-icon {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  #map {
+    height: 300px !important;
+  }
+
+  .branches-list h4 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  [dir="rtl"] .branches-list h4:after {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+/* --- End of styles.css --- */

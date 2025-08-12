@@ -371,6 +371,66 @@
       </div>
     </section>
 
+    <section class="branches-map" id="branches">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Branches</h2>
+          <p class="pb-3">We serve students from multiple locations in Egypt</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 mb-4 order-lg-1 order-2">
+            <div class="map-container">
+              <div
+                id="map"
+                style="height: 450px; border-radius: 10px; overflow: hidden"
+              ></div>
+            </div>
+          </div>
+          <div class="col-lg-4 order-lg-2 order-1">
+            <div class="branches-list">
+              <h4 class="mb-4">Our Branch Locations</h4>
+              <div class="branch-item" data-location="giza">
+                <div class="branch-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="branch-info">
+                  <h5>Giza</h5>
+                  <p>Main Branch</p>
+                  <div class="branch-contact">
+                    <small><i class="fas fa-phone"></i> +20 102 025 5497</small>
+                  </div>
+                </div>
+              </div>
+              <div class="branch-item" data-location="sharqia">
+                <div class="branch-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="branch-info">
+                  <h5>Sharqia</h5>
+                  <p>Sharqia Branch</p>
+                  <div class="branch-contact">
+                    <small><i class="fas fa-phone"></i> +20 155 267 5518</small>
+                  </div>
+                </div>
+              </div>
+              <div class="branch-item" data-location="luxor">
+                <div class="branch-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="branch-info">
+                  <h5>Luxor</h5>
+                  <p>Luxor Branch</p>
+                  <div class="branch-contact">
+                    <small><i class="fas fa-phone"></i> +20 115 684 7022</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="steps" id="steps">
       <div class="container">
         <div class="section-title">
@@ -897,6 +957,96 @@
       <img class="modal-content" id="modalImage" />
       <div id="caption" class="modal-caption"></div>
     </div>
+    <script>
+      let map;
+      let markers = {};
+
+      const branches = {
+        giza: {
+          name: "Giza - Main Branch",
+          coords: [30.0131, 31.2089],
+          phone: "+20 102 025 5497",
+        },
+        sharqia: {
+          name: "Sharqia",
+          coords: [30.5965, 31.5034],
+          phone: "+20 155 267 5518",
+        },
+        luxor: {
+          name: "Luxor",
+          coords: [25.6872, 32.6396],
+          phone: "+20 115 684 7022",
+        },
+      };
+
+      function initMap() {
+        map = L.map("map", {
+          center: [26.8206, 30.8025],
+          zoom: 6,
+          zoomControl: true,
+        });
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "© OpenStreetMap contributors",
+          maxZoom: 18,
+        }).addTo(map);
+
+        Object.keys(branches).forEach((branchKey) => {
+          const branch = branches[branchKey];
+          const marker = L.marker(branch.coords).addTo(map).bindPopup(`
+        <div style="text-align: center; direction: ltr; font-family: 'Segoe UI', sans-serif;">
+          <strong style="color: #ff6b35; font-size: 16px;">${
+            branch.name
+          }</strong><br>
+          <div style="margin-top: 8px; color: #5c677d;">
+            <i class="fas fa-phone" style="color: #ff6b35; margin-right: 5px;"></i>
+            ${branch.phone}
+          </div>
+          <div style="margin-top: 10px;">
+            <a href="https://wa.me/${branch.phone.replace(/[\s\+]/g, "")}"
+               target="_blank"
+               style="background: #ff6b35; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px;">
+              <i class="fab fa-whatsapp"></i> Contact Us
+            </a>
+          </div>
+        </div>
+      `);
+          markers[branchKey] = marker;
+        });
+
+        document.querySelectorAll(".branch-item").forEach((item) => {
+          item.addEventListener("click", function () {
+            const location = this.getAttribute("data-location");
+            document
+              .querySelectorAll(".branch-item")
+              .forEach((i) => i.classList.remove("active"));
+            this.classList.add("active");
+            if (branches[location]) {
+              map.setView(branches[location].coords, 12);
+              markers[location].openPopup();
+            }
+          });
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        if (!document.querySelector('link[href*="leaflet"]')) {
+          const leafletCSS = document.createElement("link");
+          leafletCSS.rel = "stylesheet";
+          leafletCSS.href = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
+          document.head.appendChild(leafletCSS);
+        }
+
+        if (!window.L) {
+          const leafletJS = document.createElement("script");
+          leafletJS.src = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js";
+          leafletJS.onload = initMap;
+          document.head.appendChild(leafletJS);
+        } else {
+          initMap();
+        }
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/script.js"></script>
   </body>
