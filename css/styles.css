@@ -790,6 +790,7 @@ section {
 }
 
 .branches-list h4 {
+  text-align: center;
   color: var(--secondary-gray);
   font-weight: 700;
   position: relative;
@@ -803,7 +804,7 @@ section {
   height: 3px;
   background-color: var(--primary-orange);
   bottom: 0;
-  left: 0;
+  left: calc(50% - 25px);
 }
 
 .branch-item {
@@ -884,7 +885,7 @@ section {
 
 [dir="rtl"] .branches-list h4:after {
   left: auto;
-  right: 0;
+  right: calc(50% - 25px);
 }
 
 [dir="rtl"] .branch-item:hover,
@@ -941,7 +942,7 @@ section {
   }
 
   [dir="rtl"] .branches-list h4:after {
-    right: 50%;
+    right: calc(50% - 25px);
     transform: translateX(50%);
   }
 }
